@@ -1,0 +1,84 @@
+function [resh_input] = checkinput(input)
+
+    % check the input signal shape
+    sz_x0 = size(input.x0);   
+    if sz_x0(1)==1 % row vector
+        resh_input.x0 = input.x0.';
+    elseif sz_x0(2)==1 % column vector -> right shape
+        resh_input.x0 = input.x0;
+    else    % matrix and not vector
+        disp('params.x0 should be a vector, got a matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+    % check the input signal type
+    if ~isa(resh_input.x0, 'double')
+        disp('params.x0 should be real (double), got other type instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    
+    % check the sampling time
+    sz_Ts = size(input.Ts);    
+    if sz_Ts(2)==1
+        resh_input.Ts = input.Ts;
+    else
+        disp('params.Ts should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the oversampling factor
+    sz_M = size(input.M);    
+    if sz_M(2)==1
+        resh_input.M = input.M;
+    else
+        disp('params.M should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the number of tones to search
+    sz_K = size(input.K);    
+    if sz_K(2)==1
+        resh_input.K = input.K;
+    else
+        disp('params.K should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the number of refinement iterations
+    sz_NCFC = size(input.NCFC);    
+    if sz_NCFC(2)==1
+        resh_input.NCFC = input.NCFC;
+    else
+        disp('params.NCFC should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the lowerbound for tones search
+    sz_f_min = size(input.f_min);    
+    if sz_f_min(2)==1
+        resh_input.f_min = input.f_min;
+    else
+        disp('params.f_min should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the upperbound for tones search
+    sz_f_max = size(input.f_max);    
+    if sz_f_max(2)==1
+        resh_input.f_max = input.f_max;
+    else
+        disp('params.f_max should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the values of upperbound and lowerbound
+    if input.f_min <= input.f_max
+end
