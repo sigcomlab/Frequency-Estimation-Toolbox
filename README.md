@@ -17,9 +17,9 @@ In this toolbox, the following frequency estimation algorithms based on approxim
   
 **2.	*Complex Single Frequency Estimation and Cancellation* (CSFEC) algorithm [2]** – employed for 1-D complex type input signal.
   
-***3.	BLA BLA BLA [3]*** –
+**3.	*Complex Single Frequency-Delay Estimation and Cancellation* [3]** –
    
-***4.	BLA BLA BLA [4]*** –
+**4.	*BLA BLA BLA* [4]** –
    
 Each algorithm, implemented by a dedicated function, can be tested through its test main script (also included in the toolbox). All the test main scripts contain two examples employing the frequency estimation algorithm to search for the strongest tones in: a) synthetically generated signal, and; b) data from real world measurements.
 
@@ -29,7 +29,7 @@ Each algorithm, implemented by a dedicated function, can be tested through its t
 
 [2] Pasquale Di Viesti , ALESSANDRO DAVOLI , Giorgio Guerzoni , et al. “Novel Methods for Approximate Maximum Likelihood Estimation of Multiple Superimposed Undamped Tones and Their Application to Radar systems”. TechRxiv. August 03, 2021. DOI: 10.36227/techrxiv.15054321.v2
 
-[3] CITA ARTICOLO MICHELE
+[3] M. Mirabella, P. D. Viesti, A. Davoli and G. M. Vitetta, "An Approximate Maximum Likelihood Method for the Joint Estimation of Range and Doppler of Multiple Targets in OFDM-Based Radar Systems," in IEEE Transactions on Communications, vol. 71, no. 8, pp. 4862-4876, Aug. 2023, doi: 10.1109/TCOMM.2023.3280562.
 
 [4] CITA ARTICOLO MICHELE
 
