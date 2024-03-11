@@ -17,11 +17,13 @@ In this toolbox, the following frequency estimation algorithms based on approxim
   
 **2.	*Complex Single Frequency Estimation and Cancellation* (CSFEC) algorithm [2]** – employed for 1-D complex type input signal.
   
-**3.	*Complex Single Frequency-Delay Estimation and Cancellation* [3]** –
+**3.	*Complex Single Frequency-Delay Estimation and Cancellation (CSFDEC)* algorithm [3]** – employed for 2-D complex type input signal.
    
-**4.	*BLA BLA BLA* [4]** –
+**4.	*BLA BLA BLA* [4]** – employed for 3-D complex type input signal.
+
+**Usage**
    
-Each algorithm, implemented by a dedicated function, can be tested through its test main script (also included in the toolbox). All the test main scripts contain two examples employing the frequency estimation algorithm to search for the strongest tones in: a) synthetically generated signal, and; b) data from real world measurements.
+Each algorithm, implemented by a dedicated function, can be tested through its test main script (also included in the toolbox). All the test main scripts contain two examples employing the frequency estimation algorithm to search for the strongest tones in: a) synthetically generated signal, and; b) data from real world measurements obtained through radars.
 
 **References**
 
