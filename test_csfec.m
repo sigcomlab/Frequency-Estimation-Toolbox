@@ -35,7 +35,7 @@
 % Website: https://www.sigcom.unimore.it/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all
-clear all
+clear
 clc
 
 %% EXAMPLE 1
