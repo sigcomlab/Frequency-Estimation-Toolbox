@@ -148,22 +148,11 @@ for qq = 1 : params.NCFC
                     - AF1_local;
                 X2a = 1/params.N*(sum(x(3,:).*exp(-1j*2*pi*params.np(1,:)*F))) ...
                     - AF2_local;
-                
-%                 C1_2l = params.C1(2*bin(jj)-1);
-%                 C2_2l = params.C2(2*bin(jj)-1);
-%                 
-%                 w = exp(-1i*4*pi*f(jj));
-%                 gf = 1/params.N0*(w^params.N0-1)/(w-1);
-% 
-%                 Ar = (real(C)*(1-real(gf))-imag(C)*(imag(gf)))/(1-abs(gf)^2);
-%                 Ai = (imag(C)*(1+real(gf))-real(C)*(imag(gf)))/(1-abs(gf)^2);
-                A(jj) = C;      % Ar+1i*Ai;
+                A(jj) = C;   
                 
                 for it = 1:5
                     
-                    %b = -real(conj(A(jj))*X2a)+2*real(conj(A(jj))^2*C2_2l);
                     b = real(conj(A(jj))*X2a);
-                    %c = -imag(conj(A(jj))*X1a)-imag(conj(A(jj))^2*C1_2l);
                     c = -imag(conj(A(jj))*X1a);
                     Delta = -c/b;
                     F = F + (Delta/(2*pi));
@@ -183,13 +172,6 @@ for qq = 1 : params.NCFC
                         - AF1_local;
                     X2a = 1/params.N*(sum(x(3,:).*exp(-1j*2*pi*params.np(1,:)*F))) ...
                         - AF2_local;
-                                       
-%                     w = exp(-1i*4*pi*F);
-%                     gf = 1/params.N0*(w^params.N0-1)/(w-1);
-% 
-%                     Ar = (real(C)*(1-real(gf))-imag(C)*(imag(gf)))/(1-abs(gf)^2);
-%                     Ai = (imag(C)*(1+real(gf))-real(C)*(imag(gf)))/(1-abs(gf)^2);
-                     %Ar+1i*Ai;
 
                 end
                 A(jj) = C;
@@ -220,4 +202,155 @@ for qq = 1 : params.NCFC
         
     end
 end
+end
 
+%% function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+
+N = const.N;
+N2 = N^2;
+     
+qb = q.^(N);           
+qc = q.^(N + 1);         
+qd = q.^(N + 2);         
+
+q_1 = q - 1;
+den0 = q_1;
+den1 = q_1.^2;
+den2 = q_1.^3;
+
+F0 = (qb - 1) ./ den0;
+F1 = ((N - 1) * qc - N * qb + q) ./ den1;
+F2 = (((N - 1)^2) * qd + (-2*N2 + 2*N +1)*qc + N2*qb - q.^2 - q) ./ den2;
+
+if any(any(to_lim))
+    F0(to_lim) = const.N;
+    F1(to_lim) = (const.N^2 - const.N)/2;
+    F2(to_lim) = ((2*const.N-1)*(const.N-1)*const.N)/6;
+end
+
+F0 = F0./ const.N;
+F1 = F1./ const.N;
+F2 = F2./ const.N;
+end
+
+%% function [resh_input] = csfec_checkinput(input)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ** Description **
+% checkinput is a function to check the size, shape and values of the input
+% parameters of csfec function.
+%
+% ** Syntax**
+% [resh_input] = checkinput(input)
+%
+% ** Input arguments**
+% - input: a class containing
+%       1. input.x0: is a vector containing the (time-domain) signal to be
+%       analysed.
+%       2. input.Ts: is the sampling time (single value) of the signal 
+%       params.X0.
+%       3. input.M: is the oversampling factor (single value) that will be
+%       employed for the FFTs.
+%       4. input.K: is the number of peaks to find (single value).
+%       5. input.NCFC: number of sfec refinement iterations 
+%       (default=1).
+%       6. input.f_min: is the lowerbound frequency (Hz) in the peaks 
+%       search (none=0).
+%       7. input.f_max: is the upperbound frequency (Hz) in the peaks 
+%       search (none=0).          
+%
+% ** Output arguments**
+% - resh_input: is a class containing the same attributes of input, but
+% properly reshaped and checked.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function [resh_input] = csfec_checkinput(input)
+
+    % check the input signal shape
+    sz_x0 = size(input.x0);   
+    if sz_x0(1)==1 % row vector
+        resh_input.x0 = input.x0.';
+    elseif sz_x0(2)==1 % column vector -> right shape
+        resh_input.x0 = input.x0;
+    else    % matrix and not vector
+        disp('params.x0 should be a vector, got a matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+    % check the input signal type
+    if isreal(resh_input.x0)
+        disp('params.x0 should be complex (double), got other type instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    
+    % check the sampling time
+    sz_Ts = size(input.Ts);    
+    if sz_Ts(2)==1
+        resh_input.Ts = input.Ts;
+    else
+        disp('params.Ts should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the oversampling factor
+    sz_M = size(input.M);    
+    if sz_M(2)==1
+        resh_input.M = input.M;
+    else
+        disp('params.M should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the number of tones to search
+    sz_K = size(input.K);    
+    if sz_K(2)==1
+        resh_input.K = input.K;
+    else
+        disp('params.K should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the number of refinement iterations
+    sz_NCFC = size(input.NCFC);    
+    if sz_NCFC(2)==1
+        resh_input.NCFC = input.NCFC;
+    else
+        disp('params.NCFC should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the lowerbound for tones search
+    sz_f_min = size(input.f_min);    
+    if sz_f_min(2)==1
+        resh_input.f_min = input.f_min;
+    else
+        disp('params.f_min should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the upperbound for tones search
+    sz_f_max = size(input.f_max);    
+    if sz_f_max(2)==1
+        resh_input.f_max = input.f_max;
+    else
+        disp('params.f_max should be a value, got a vector or matrix instead')
+        disp('Press enter to go on')
+        pause
+    end
+
+    % check the values of upperbound and lowerbound
+    if input.f_min > input.f_max
+        disp('Error: params.f_max should be >= than params.f_min')
+        disp('Press enter to go on')
+        pause
+    end
+end
