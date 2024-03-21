@@ -135,7 +135,7 @@ for qq = 1 : params.NCFC
                 fdiff = f(idx)-f(jj);
                 to_lim = abs(fdiff)<eps;
                 q = exp(1j*2*pi*fdiff);               
-                [F0, F1, F2] = residualDFT_new(q, params, to_lim);
+                [F0, F1, F2] = residualDFT1(q, params, to_lim);
                 
                 AF0_local = sum(A(idx) .* F0, 1);
                 AF1_local = sum(A(idx) .* F1, 1);
@@ -159,7 +159,7 @@ for qq = 1 : params.NCFC
                     fdiff = f(idx)-F;
                     to_lim = abs(fdiff)<eps;
                     q = exp(1j*2*pi*fdiff);
-                    [F0, F1, F2] = residualDFT_new(q, params, to_lim);
+                    [F0, F1, F2] = residualDFT1(q, params, to_lim);
                 
                     AF0_local = sum(A(idx) .* F0, 1);
                     AF1_local = sum(A(idx) .* F1, 1);
@@ -203,12 +203,28 @@ for qq = 1 : params.NCFC
     end
 end
 end
+%% Other functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function [F0] = residualDFT0(q, const, to_lim)
 
-%% function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+N = const.N;
+
+qb = q.^(N);         
+
+q_1 = q - 1;
+den0 = q_1;
+
+F0 = (qb - 1) ./ den0;
+
+if any(any(to_lim))
+    F0(to_lim) = const.N;
+end
+
+F0 = F0./ const.N;
+end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+function [F0, F1, F2] = residualDFT1(q, const, to_lim)
 
 N = const.N;
 N2 = N^2;
@@ -237,7 +253,6 @@ F1 = F1./ const.N;
 F2 = F2./ const.N;
 end
 
-%% function [resh_input] = csfec_checkinput(input)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ** Description **
 % checkinput is a function to check the size, shape and values of the input

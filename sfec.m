@@ -135,8 +135,8 @@ for qq = 1 : params.NCFC
                 to_lim_c = abs(fdiff_c)<eps;
                 q = exp(1j*2*pi*fdiff);               
                 q_c = exp(-1j * 2 * pi * fdiff_c);
-                [F0, F1, F2] = residualDFT_new(q, params, to_lim);
-                [F0_c, F1_c, F2_c] = residualDFT_new(q_c, params, to_lim_c);
+                [F0, F1, F2] = residualDFT1(q, params, to_lim);
+                [F0_c, F1_c, F2_c] = residualDFT1(q_c, params, to_lim_c);
                 
                 AF0_local = sum(A(idx) .* F0 + conj(A(idx)).* F0_c, 1);
                 AF1_local = sum(A(idx) .* F1 + conj(A(idx)).* F1_c, 1);
@@ -172,8 +172,8 @@ for qq = 1 : params.NCFC
                     to_lim_c = abs(fdiff_c)<eps;
                     q = exp(1j*2*pi*fdiff);
                     q_c = exp(-1j*2*pi*fdiff_c);
-                    [F0, F1, F2] = residualDFT_new(q, params, to_lim);
-                    [F0_c, F1_c, F2_c] = residualDFT_new(q_c, params, to_lim_c);
+                    [F0, F1, F2] = residualDFT1(q, params, to_lim);
+                    [F0_c, F1_c, F2_c] = residualDFT1(q_c, params, to_lim_c);
                 
                     AF0_local = sum(A(idx) .* F0 + conj(A(idx)).* F0_c, 1);
                     AF1_local = sum(A(idx) .* F1 + conj(A(idx)).* F1_c, 1);
@@ -225,9 +225,7 @@ for qq = 1 : params.NCFC
 end
 end
 
-%% function [F0] = residualDFT0(q, const, to_lim)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+%% Other functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [F0] = residualDFT0(q, const, to_lim)
 
@@ -247,11 +245,9 @@ end
 F0 = F0./ const.N;
 end
 
-%% function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [F0, F1, F2] = residualDFT_new(q, const, to_lim)
+function [F0, F1, F2] = residualDFT1(q, const, to_lim)
 
 N = const.N;
 N2 = N^2;
@@ -280,7 +276,6 @@ F1 = F1./ const.N;
 F2 = F2./ const.N;
 end
 
-%% function [resh_input] = sfec_checkinput(input)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ** Description **
 % checkinput is a function to check the size, shape and values of the input
