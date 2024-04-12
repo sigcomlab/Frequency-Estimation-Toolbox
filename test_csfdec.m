@@ -1,13 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ** Description **
-% test_csfdec is a main script to test the csfdec function. The script is
-% organized in two parts, providing two different examples:
+% test_csfdec is a main script to test the csfdec function. The script 
+% provides a simple example:
 %   1) a signal composed by 4 spectral 2D tones (at different amplitudes) is
 %   generated and analysed by the csfdec function [1].
-%   2) a signal is generated in a Montecarlo simulation to verify the root
-%   mean square error (RMSE) performance of the CSFDEC when 2 close 2D tones are
-%   present. The RMSEs are compared against the Cramèr-Rao lower bound
-%   (CRLB) for the considered scenario
+%
+%
+% ** References **
+% [1] M. Mirabella, P. D. Viesti, A. Davoli and G. M. Vitetta, 
+% "An Approximate Maximum Likelihood Method for the Joint Estimation of 
+% Range and Doppler of Multiple Targets in OFDM-Based Radar Systems," 
+% in IEEE Transactions on Communications, vol. 71, no. 8, pp. 4862-4876, 
+% Aug. 2023, doi: 10.1109/TCOMM.2023.3280562.
+%
+%
+% REVIEW VERSION : V1.0
+%
+% last review: 12/04/2024
 
 %% EXAMPLE 1: 2D HARMONIC RETRIEVAL PROBLEM
 

@@ -10,20 +10,24 @@
 % exp(-1i*2*pi*n*fr_l) + w[m,n]
 %
 % ** Input arguments**
-% - params: a class containing
-%       1. params.x0: is a vector containing the (time-domain) signal to be
-%       analysed.
-%       2. params.Ts: is the sampling time (single value) of the signal 
-%       params.X0.
-%       3. params.M: is the oversampling factor (single value) that will be
-%       employed for the FFTs.
-%       4. params_SFEC.K: is the number of peaks to find (single value).
-%       5. params_SFEC.NCFC: number of sfec refinement iterations 
-%       (default=1).
-%       6. params.f_min: is the lowerbound frequency (Hz) in the peaks 
-%       search (none=0).
-%       7. params.f_max: is the upperbound frequency (Hz) in the peaks 
-%       search (none=0).          
+% - H               : MxN measurement matrix
+% - params          : a class containing
+%   1. M            : first dimension of the matrix H (number of rows)
+%   2. N            : second dimension of the matrix H (number of columns)
+%   3. K            : number of 2D tones to search
+%   4. LM           : oversampling factor along rows of H
+%   5. LN           : oversampling factor along columns of H
+%   6. M0           : params.M*params.LM;
+%   7. N0           : params.N*params.LN;
+%   8. mp           : params.mp = [m0 m0.^2 m0.^3]; where m0 = (0:1:par.M-1).';
+%   9. np           : params.np = [n0; n0.^2; n0.^3]; where n0 = (0:1:par.N-1);
+%   10. seq_m       : par.seq_m = 0:1:par.M0-1;
+%   11. seq_n       : par.seq_n = 0:1:par.N0-1;
+%   12. Vm0         : par.Vm0 = par.seq_m/par.M0;
+%   13. Vn0         : par.Vn0 = par.seq_n/par.N0;
+%   14. it_residual : number of iterations to compute frequency residuals
+%   15. re_est      : number of re-estimations to be carried out
+%     
 %
 % ** Output argument**
 % - T: a class containing
@@ -51,7 +55,7 @@
 % in IEEE Transactions on Communications, vol. 71, no. 8, pp. 4862-4876, 
 % Aug. 2023, doi: 10.1109/TCOMM.2023.3280562.
 %
-% v1.0 - march 2024
+% v1.0- april 2024
 % Copyright (c) Prof. Giorgio Matteo Vitetta (giorgiomatteo.vitetta@unimore.it)
 % Website: https://www.sigcom.unimore.it/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
