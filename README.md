@@ -19,7 +19,7 @@ In this toolbox, the following frequency estimation algorithms based on approxim
   
 **3.	*Complex Single Frequency-Delay Estimation and Cancellation (CSFDEC)* algorithm [3]** – employed for 2-D complex type input signal.
    
-**4.	*BLA BLA BLA* [4]** – employed for 3-D complex type input signal.
+**4.	*Doppler, Range and Angle Estimation with Successive Compensation (DRAEC)* algorithm [4]** – employed for 3-D complex type input signal.
 
 **Usage**
    
@@ -29,11 +29,11 @@ Each algorithm, implemented by a dedicated function, can be tested through its t
 
 [1] P. Di Viesti, A. Davoli, G. Guerzoni and G. M. Vitetta, "Novel Deterministic Detection and Estimation Algorithms for Colocated Multiple-Input Multiple-Output Radars," in IEEE Access, vol. 10, pp. 2216-2255, 2022, doi: 10.1109/ACCESS.2021.3139200.
 
-[2] Pasquale Di Viesti , ALESSANDRO DAVOLI , Giorgio Guerzoni , et al. “Novel Methods for Approximate Maximum Likelihood Estimation of Multiple Superimposed Undamped Tones and Their Application to Radar systems”. TechRxiv. August 03, 2021. DOI: 10.36227/techrxiv.15054321.v2
+[2] Pasquale Di Viesti , Alessandro Davoli, Giorgio Guerzoni , et al. “Novel Methods for Approximate Maximum Likelihood Estimation of Multiple Superimposed Undamped Tones and Their Application to Radar systems”. TechRxiv. August 03, 2021. DOI: 10.36227/techrxiv.15054321.v2
 
 [3] M. Mirabella, P. D. Viesti, A. Davoli and G. M. Vitetta, "An Approximate Maximum Likelihood Method for the Joint Estimation of Range and Doppler of Multiple Targets in OFDM-Based Radar Systems," in IEEE Transactions on Communications, vol. 71, no. 8, pp. 4862-4876, Aug. 2023, doi: 10.1109/TCOMM.2023.3280562.
 
-[4] CITA ARTICOLO MICHELE
+[4] M. Mirabella, P. Di Viesti and G. M. Vitetta, "Deterministic Algorithms for Four-Dimensional Imaging in Colocated MIMO OFDM-Based Radar Systems," in IEEE Open Journal of the Communications Society, vol. 4, pp. 1516-1543, 2023, doi: 10.1109/OJCOMS.2023.3292796.
 
 [5] R. Schmidt, “Multiple emitter location and signal parameter estimation,” IEEE Trans. Antennas Propag., vol. 34, no. 3, pp. 276–280, Mar. 1986.
 
