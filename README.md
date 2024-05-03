@@ -1,4 +1,8 @@
 # Frequency Estimation Toolbox
+***Summary***
+
+This toolbox contains the SFEC, CSFEC, CSFDEC and DRAEC algorithms for the frequency estimation in 1D (real and complex), 2D and 3D domains.
+
 **Introduction**
 
 The problem of estimating the amplitude, phase and frequency of multiple tones in *additive white Gaussian noise* (AWGN) has received significant attention for a number of years because of its relevance in various fields, including radar systems and wireless communications. In the last years, some solutions to this problem have been proposed. Those available in this toolbox, which are described in detail in [1,2,3,4] and are based on approximate *maximum likelihood* (ML) estimation, exhibit the following advantages
