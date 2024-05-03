@@ -56,3 +56,7 @@ Each algorithm, implemented by a dedicated function, can be tested through its t
 [12] J. Li and P. Stoica, “Efficient Mixed-Spectrum Estimation with Applications to Target Feature Extraction,” IEEE Trans. Signal Process., vol. 44, no. 2, pp. 281–295, Feb. 1996. 
 
 [13] J. Rissanen, “A Universal Prior for Integers and Estimation by Minimum Description Length,” Ann. Stat., vol. 11, no. 2, pp. 416–431, Jun. 1983.
+
+**Cite as**
+
+SIGCOMLAB (2024), Frequency estimation toolbox. Available: https://github.com/sigcomlab/Frequency-Estimation-Toolbox/
